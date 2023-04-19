@@ -1,0 +1,18 @@
+@import '../../../../../index.scss';
+
+.form-container {
+
+  &__title{
+    padding: getPadding(primary);
+    padding-bottom: 0;
+    font-size: 1.8em;
+  }
+
+  &__fields {
+    padding: getPadding(primary);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+  }
+}

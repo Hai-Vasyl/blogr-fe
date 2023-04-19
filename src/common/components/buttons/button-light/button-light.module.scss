@@ -1,0 +1,43 @@
+@import '../../../../index.scss';
+
+.button {
+  background-color: transparent;
+  color: getColor(secondary);
+  border-color: getColor(primary-dark);
+  background-color: getColor(primary-light-light);
+
+  &::before {
+    content: '';
+    display: none;
+    // position: absolute;
+    // top: -1px;
+    // left: -1px;
+    // bottom: -1px;
+    // right: 100%;
+    // transition: getTransition(primary);
+    // background-color: getColor(accent);
+    // opacity: 0;
+  }
+
+  &:hover {
+    border-color: getColor(accent);
+     
+    .button__name {
+      color: getColor(accent);
+    }
+    
+    .icon {
+      color: getColor(accent);
+      font-size: 0.9em;
+    }
+  } 
+  
+  &__name{
+    font-size: getFontSize(secondary);
+  }
+
+  .icon {
+    font-size: 0.9em;
+    color: black;
+  }
+}

@@ -1,0 +1,60 @@
+@import '../../../../../../index.scss';
+
+.field-message {
+  position: relative;
+  display: inline-block;
+  @extend %fade-out;
+  margin: 2px 0;
+
+  &--active{
+    @extend %fade-in;
+  }
+
+  &__message{
+    position: absolute;
+    padding: 6px;
+    max-width: 350px;
+    min-width: 150px;
+    font-size: getFontSize(secondary);
+    margin-top: 2px;
+    right: 0;
+    top: 20px;
+    background-color: getColor(secondary);
+    color: getColor(primary);
+    display: none;
+    font-family: getFont(secondary);
+    z-index: 5;
+    
+    &--right{
+      right: 0;
+    }
+  }
+
+  &:hover{ 
+    .field-message__message, .field-message__triangle {
+      display: block;
+    }
+  }
+
+  &__icon{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    & .icon {
+      font-size: 1em;
+    }
+  }
+
+  &__triangle{
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-bottom-color: getColor(secondary);
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+  }
+}

@@ -1,0 +1,19 @@
+@import "../../../../index.scss";
+
+.nav-drop-down-link {
+  text-decoration: none;
+  color: white;
+  background-color: getColor(secondary);
+  padding: 7px 20px;
+  font-size: getFontSize(secondary);
+  text-align: left;
+  transition: getTransition(primary);
+
+  &--active {
+    color: getColor(accent);
+  }
+
+  &:hover {
+    background-color: getColor(secondary-light);
+  }
+}

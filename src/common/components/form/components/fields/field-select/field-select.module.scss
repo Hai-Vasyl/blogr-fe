@@ -1,0 +1,118 @@
+@import '../../../../../../index.scss';
+
+.field-select {
+  display: block;
+
+  &--disabled{
+
+    .select {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  &--hidden{
+    display: none;
+  }
+
+  &__field-container {
+
+  }
+
+  .select {
+    position: relative;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    &--active{
+      .select__button {
+        border-color: getColor(accent);
+      }
+      
+      .select__options {
+        border-color: getColor(accent);
+        display: flex;
+        transform: translateY(0%);
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .select__icon {
+        .icon{
+          transform: rotateZ(180deg);
+        }
+      }
+    }
+
+    &__button {
+      height: 35.6px;
+      width: 100%;
+      border: 1px solid getColor(primary-dark);
+      background-color: getColor(primary-light-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 10px;
+      transition: getTransition(primary);
+      position: relative;
+      z-index: 3;
+
+      &--error {
+        border-color: getColor(danger);
+      }
+    }
+
+    &__label {
+
+    }
+
+    &__icon {
+      border-left: 1px solid getColor(primary-dark);
+      padding: 4px 7px;
+      display: flex;
+
+      .icon {
+        font-size: getFontSize(primary);
+        transition: getTransition(primary);
+        margin: auto;
+      }
+    }
+
+    &__options {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      z-index: 2;
+      border: 1px solid getColor(primary-dark);
+      border-top: none;
+      transition: getTransition(primary);
+      transform: translateY(5%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    &__option {
+      font-size: getFontSize(secondary);
+      height: 30px;
+      background-color: getColor(primary-light-light);
+      text-align: left;
+      padding: 0 10px;
+      transition: getTransition(primary);
+
+      &:hover {
+        background-color: getColor(accent);
+        color: white;
+      }
+      
+      &--selected {
+        background-color: getColor(primary);
+        
+        &:hover {
+          background-color: getColor(primary);
+          color: getColor(secondary);  
+        }
+      }
+    }
+
+  }
+}

@@ -1,0 +1,62 @@
+@import "../../../../index.scss";
+
+.nav-link {
+  position: relative;
+
+  &:hover {
+    
+    .icon {
+      background-color: getColor(primary);
+    }
+
+    .nav-link__label {
+      opacity: 1;
+      transform: translate(0px, -50%);
+    }
+
+    .nav-link__triangle {
+      left: -11px;
+    }
+  }
+
+  .icon {
+    font-size: 1.5em;
+    color: getColor(secondary);
+    padding: 15px;
+    border-radius: 50%;
+    transition: getTransition(primary);
+  }
+  
+  &--active {
+    .icon {
+      color: getColor(accent);
+    }
+  }
+  
+  &__label {
+    position: absolute;
+    background-color: getColor(secondary);
+    color: white;
+    font-size: getFontSize(secondary);
+    padding: 7px 15px;
+    top: 50%;
+    left: 64px;
+    transform: translate(10px, -50%);
+    font-family: getFont(secondary);
+    opacity: 0;
+    transition: getTransition(primary);
+    pointer-events: none;
+  }
+
+  &__triangle {
+    border: 6px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-right-color: getColor(secondary);
+    left: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: getTransition(primary);
+  }
+}

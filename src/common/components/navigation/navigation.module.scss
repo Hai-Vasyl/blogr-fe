@@ -1,0 +1,30 @@
+@import "../../../index.scss";
+
+.navigation{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  // border: 1px solid black;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  background-color: getColor(primary-light-light);
+
+  &__logo {
+    // padding: 5px;
+
+    img {
+      width: 100%;
+      width: 40px;
+    }
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

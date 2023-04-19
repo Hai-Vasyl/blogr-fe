@@ -1,0 +1,16 @@
+@import '../../../index.scss';
+
+.form {
+  background-color: getColor(primary-light);
+
+  &__container{
+  }
+
+  &__buttons{
+    display: flex;
+    justify-content: center;
+    padding: getPadding(primary);
+    padding-top: 0;
+    gap: 10px;
+  }
+}

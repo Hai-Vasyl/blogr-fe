@@ -1,0 +1,36 @@
+@import '../../../../../../index.scss';
+
+.field-input {
+  display: block;
+
+  &--disabled{
+    .field-input__field {
+      opacity: 0.5;
+    }
+  }
+
+  &--hidden{
+    display: none;
+  }
+
+  &__field-container {
+  }
+
+  &__field {
+    width: 100%;
+    border: 1px solid getColor(primary-dark);
+    padding: 5px 6px;
+    background-color: getColor(primary);
+    transition: getTransition(primary);
+
+    &:focus {
+      outline: none;
+      border-color: getColor(accent);
+    }
+
+    &--error {
+      border-color: getColor(danger);
+    }
+
+  }
+}

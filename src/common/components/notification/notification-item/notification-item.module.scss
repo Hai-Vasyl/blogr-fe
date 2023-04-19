@@ -1,0 +1,67 @@
+@import '../../../../index.scss';
+
+.notification-item {
+  border: 2px solid transparent;
+  background-color: getColor(primary-light);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  max-width: 500px;
+  min-width: 200px;
+  box-shadow: getShadow(primary);
+  cursor: pointer;
+  animation: fade getTransition(primary);
+  pointer-events: all;
+
+  &--error {
+    background-color: rgb(254, 192, 192);
+    border-color: red;
+    
+    .notification-item__icon {
+      color: red;
+    }
+  }
+
+  &--info {
+    background-color: rgb(183, 183, 255);
+    border-color: blue;
+    
+    .notification-item__icon {
+      color: blue;
+    }
+  }
+
+  &--success {
+    background-color: rgb(190, 255, 190);
+    border-color: green;
+    
+    .notification-item__icon {
+      color: green;
+    }
+  }
+  
+  &--warning {
+    background-color: rgb(255, 226, 172);
+    border-color: lighten(orange, 20);
+    
+    .notification-item__icon {
+      color: orange;
+    }
+  }
+
+  &__icon{
+    display: flex;
+
+    .icon {
+      margin: auto;
+      font-weight: bold;
+    }
+  }
+
+  &__message{
+    font-size: getFontSize(secondary);
+    font-weight: bold;
+    font-family: getFont(secondary);
+  }
+}

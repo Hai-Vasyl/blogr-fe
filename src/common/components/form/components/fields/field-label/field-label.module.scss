@@ -1,0 +1,13 @@
+@import '../../../../../../index.scss';
+
+.field-label{
+  font-size: getFontSize(secondary);
+  font-weight: bold;
+  font-family: getFont(secondary);
+
+  &__important{
+    color: getColor(danger);
+    font-size: 1.2em;
+    margin-left: 4px;
+  }
+}

@@ -1,0 +1,51 @@
+@import "../../../../index.scss";
+
+.nav-drop-down-menu-button {
+  &__button {
+    position: relative;
+    width: 53px;
+    height: 53px;
+    border-radius: 50%;
+    border: 5px solid transparent;
+    transition: getTransition(primary);
+  }
+
+  &--active {
+
+    .nav-drop-down-menu-button__button {
+      border-color: getColor(primary);
+    }
+    
+    .nav-drop-down-menu-button__options {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+
+    .nav-drop-down-menu-button__triangle {
+      left: -11px;
+    }
+  }
+
+  &__options {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 74px;
+    bottom: 0;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: getTransition(primary);
+    box-shadow: getShadow(primary);
+  }
+
+  &__triangle {
+    border: 6px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-right-color: getColor(secondary);
+    left: -5px;
+    bottom: 30px;
+    transition: getTransition(primary);
+  }
+}

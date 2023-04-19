@@ -1,0 +1,32 @@
+@import "../../../index.scss";
+
+@keyframes spin {
+  from {
+    transform: rotateZ(0deg);
+  } to {
+    transform: rotateZ(360deg);
+  }
+}
+
+.loader {
+  position: absolute;
+  display: flex;
+  z-index: 5;
+  animation: fade getTransition(primary);
+  background-color: rgba(245, 246, 250, 0.6);
+  backdrop-filter: blur(3px);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  &__spin{
+    margin: auto;
+    width: 75px;
+    height: 75px;
+    border: 5px solid transparent;
+    border-radius: 50%;
+    border-right-color: getColor(secondary);
+    animation: spin 0.6s linear infinite;
+  }
+}
