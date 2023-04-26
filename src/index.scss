@@ -9,36 +9,43 @@ $colors: (
   primary-light: lighten(rgb(228, 232, 241), 5%),
   primary-light-light: white,
   primary-dark: darken(rgb(228, 232, 241), 7%),
-  
   secondary: #222,
   secondary-light: lighten(#222, 10%),
-
   accent: rgb(2, 135, 218),
-
   danger: red,
 );
 
 $fonts: (
-  primary: ('Poppins', sans-serif),
-  secondary: ('Open Sans', sans-serif)
+  primary: (
+    "Poppins",
+    sans-serif,
+  ),
+  secondary: (
+    "Open Sans",
+    sans-serif,
+  ),
 );
 
 $font-sizes: (
   primary: 1em,
-  secondary: 0.8em
+  secondary: 0.8em,
 );
 
 $transitions: (
-  primary: 0.3s ease
+  primary: 0.3s ease,
 );
 
 $shadows: (
-  primary: (rgba(149, 157, 165, 0.2) 0px 8px 24px),
-  secondary: (rgba(0, 0, 0, 0.36) 0px 1px 4px)
+  primary: (
+    rgba(149, 157, 165, 0.2) 0px 8px 24px,
+  ),
+  secondary: (
+    rgba(0, 0, 0, 0.36) 0px 1px 4px,
+  ),
 );
 
 $paddings: (
-  primary: 25px
+  primary: 25px,
 );
 
 // $radiuses: (
@@ -46,32 +53,32 @@ $paddings: (
 // );
 
 @function getColor($color) {
-  @return map-get($colors, $color) 
-};
+  @return map-get($colors, $color);
+}
 
 @function getTransition($transition) {
-  @return map-get($transitions, $transition) 
-};
+  @return map-get($transitions, $transition);
+}
 
 @function getFont($font) {
-  @return map-get($fonts, $font)
-};
+  @return map-get($fonts, $font);
+}
 
 @function getFontSize($font-size) {
-  @return map-get($font-sizes, $font-size)
-};
+  @return map-get($font-sizes, $font-size);
+}
 
 @function getPadding($padding) {
-  @return map-get($paddings, $padding)
-};
+  @return map-get($paddings, $padding);
+}
 
 // @function getRadius($radius) {
 //   @return map-get($radiuses, $radius)
 // };
 
 @function getShadow($shadow) {
-  @return map-get($shadows, $shadow)
-};
+  @return map-get($shadows, $shadow);
+}
 
 body {
   font-family: getFont(primary);
@@ -80,7 +87,8 @@ body {
   background-color: getColor(primary);
 }
 
-button, input {
+button,
+input {
   font-family: inherit;
   background-color: inherit;
   color: inherit;
@@ -107,15 +115,15 @@ button {
   from {
     opacity: 0;
     visibility: hidden;
-  } to {
+  }
+  to {
     opacity: 1;
     visibility: visible;
   }
 }
 
-// .wrapper{
-//   background-color: getColor(primary-dark);
-//   min-height: 100vh;
-//   width: calc(100vw - 66px);
-//   margin-left: auto;
-// }
+.page-wrapper {
+  min-height: 100vh;
+  width: calc(100vw - 90px);
+  margin-left: auto;
+}

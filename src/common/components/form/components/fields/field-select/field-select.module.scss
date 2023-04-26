@@ -1,33 +1,31 @@
-@import '../../../../../../index.scss';
+@import "../../../../../../index.scss";
 
 .field-select {
   display: block;
 
-  &--disabled{
-
+  &--disabled {
     .select {
       opacity: 0.5;
       pointer-events: none;
     }
   }
 
-  &--hidden{
+  &--hidden {
     display: none;
   }
 
   &__field-container {
-
   }
 
   .select {
     position: relative;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
-    &--active{
+    &--active {
       .select__button {
         border-color: getColor(accent);
       }
-      
+
       .select__options {
         border-color: getColor(accent);
         display: flex;
@@ -37,7 +35,7 @@
       }
 
       .select__icon {
-        .icon{
+        .icon {
           transform: rotateZ(180deg);
         }
       }
@@ -62,7 +60,6 @@
     }
 
     &__label {
-
     }
 
     &__icon {
@@ -89,30 +86,15 @@
       transform: translateY(5%);
       opacity: 0;
       pointer-events: none;
+      max-height: 250px;
+      overflow-y: auto;
     }
-    
-    &__option {
+
+    &__empty-options-label {
       font-size: getFontSize(secondary);
-      height: 30px;
-      background-color: getColor(primary-light-light);
+      background-color: getColor(primary);
       text-align: left;
-      padding: 0 10px;
-      transition: getTransition(primary);
-
-      &:hover {
-        background-color: getColor(accent);
-        color: white;
-      }
-      
-      &--selected {
-        background-color: getColor(primary);
-        
-        &:hover {
-          background-color: getColor(primary);
-          color: getColor(secondary);  
-        }
-      }
+      padding: 5px 10px;
     }
-
   }
 }

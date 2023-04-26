@@ -1,36 +1,36 @@
-import { useEffect } from "react"
-import { FieldInputModel } from "../../common/components/form/components/fields/field-input/field-input-model"
-import { FieldInputTypes } from "../../common/components/form/components/fields/field-input/field-input-type.enum"
-import { WithStyles } from "../../common/helpers/with-styles"
-import useForm from "../../common/components/form/hooks/useForm"
-import styles from "./form-auth.module.scss"
-import Form from "../../common/components/form/Form"
-import Button from "../../common/components/buttons/button/Button"
-import ButtonLight from "../../common/components/buttons/button-light/ButtonLight"
-import { FieldSelectModel } from "../../common/components/form/components/fields/field-select/field-select-model"
-import { Genders } from "./gender.enum"
-import { ButtonTypes } from "../../common/components/buttons/button-type.enum"
-import { AuthFormTypes } from "./auth-form-type.enum"
-import { serverApi } from "../../common/queries/server-api-slice"
-import useStore from "../../common/hooks/useStore"
-import { setAuthGlobal } from "../../common/actions/auth-slice"
-import { deactivatePopup } from "../../common/components/popup/popup-slice"
-import useErrorHandler from "../../common/hooks/useErrorHandler"
+import { useEffect } from "react";
+import { FieldInputModel } from "../../common/components/form/components/fields/field-input/field-input-model";
+import { FieldInputTypes } from "../../common/components/form/components/fields/field-input/field-input-type.enum";
+import { WithStyles } from "../../common/helpers/with-styles";
+import useForm from "../../common/components/form/hooks/useForm";
+import styles from "./form-auth.module.scss";
+import Form from "../../common/components/form/Form";
+import Button from "../../common/components/buttons/button/Button";
+import ButtonLight from "../../common/components/buttons/button-light/ButtonLight";
+import { FieldSelectModel } from "../../common/components/form/components/fields/field-select/field-select-model";
+import { Genders } from "./gender.enum";
+import { ButtonTypes } from "../../common/components/buttons/button-type.enum";
+import { AuthFormTypes } from "./auth-form-type.enum";
+import { serverApi } from "../../common/queries/server-api-slice";
+import useStore from "../../common/hooks/useStore";
+import { setAuthGlobal } from "../../common/actions/auth-slice";
+import { deactivatePopup } from "../../common/components/popup/popup-slice";
+import useErrorHandler from "../../common/hooks/useErrorHandler";
 
 interface FormAuthProps {}
 
-type FormStateKey = AuthFormTypes
+type FormStateKey = AuthFormTypes;
 type FormStateValue = {
-  group: FormStateKey
-  formLabel: string
-  buttonLeftLabel: string
-  buttonRightLabel: string
-  isLoading: boolean
-  errors?: any
-}
+  group: FormStateKey;
+  formLabel: string;
+  buttonLeftLabel: string;
+  buttonRightLabel: string;
+  isLoading: boolean;
+  errors?: any;
+};
 type FormState = {
-  [value in FormStateKey]: FormStateValue
-}
+  [value in FormStateKey]: FormStateValue;
+};
 
 const FormAuth = WithStyles<FormAuthProps>(({ styles }) => {
   const {
@@ -90,14 +90,15 @@ const FormAuth = WithStyles<FormAuthProps>(({ styles }) => {
       ],
     },
     group: "login",
-  })
-  const { dispatch } = useStore()
-  const [loginUserRequest, loginUser] = serverApi.useLoginUserMutation()
-  const [registerUserRequest, registerUser] =
-    serverApi.useRegisterUserMutation()
+  });
 
-  useErrorHandler(setErrors, loginUser.error)
-  useErrorHandler(setErrors, registerUser.error)
+  const { dispatch } = useStore();
+  const [loginUserRequest, loginUser] = serverApi.useLoginUserMutation();
+  const [registerUserRequest, registerUser] =
+    serverApi.useRegisterUserMutation();
+
+  useErrorHandler(loginUser.error, setErrors);
+  useErrorHandler(registerUser.error, setErrors);
 
   const formStates: FormState = {
     [AuthFormTypes.LOGIN]: {
@@ -108,56 +109,60 @@ const FormAuth = WithStyles<FormAuthProps>(({ styles }) => {
       isLoading: loginUser.isLoading,
     },
     [AuthFormTypes.REGISTER]: {
-      formLabel: "Login form",
       group: AuthFormTypes.LOGIN,
+      formLabel: "Login form",
       buttonLeftLabel: "Register",
       buttonRightLabel: "Login",
       isLoading: registerUser.isLoading,
     },
-  }
+  };
 
   const getFormState = (key: FormStateKey | any) => {
-    return formStates[key as FormStateKey]
-  }
+    return formStates[key as FormStateKey];
+  };
 
-  const activeForm = getFormState(group)
+  const activeForm = getFormState(group);
 
   useEffect(() => {
     if (loginUser.isSuccess) {
-      dispatch(deactivatePopup())
-      dispatch(setAuthGlobal(loginUser.data))
+      dispatch(deactivatePopup());
+      dispatch(setAuthGlobal(loginUser.data));
     }
-  }, [dispatch, loginUser.data, loginUser.isSuccess])
+  }, [dispatch, loginUser.data, loginUser.isSuccess]);
+
+  useEffect(() => {
+    if (registerUser.isSuccess) {
+      const { email, password } = formValues.auth;
+      loginUserRequest({ email, password });
+    }
+  }, [registerUser.isSuccess]);
 
   const handleSubmitAuthForm = async () => {
-    const { firstName, lastName, gender, email, password } = formValues.auth
+    const { firstName, lastName, gender, email, password } = formValues.auth;
 
     if (group === AuthFormTypes.LOGIN) {
-      await loginUserRequest({ email, password })
+      await loginUserRequest({ email, password });
     } else {
-      await Promise.all([
-        registerUserRequest({
-          firstName,
-          lastName,
-          gender: gender as Genders,
-          email,
-          password,
-        }),
-        loginUserRequest({ email, password }),
-      ])
+      await registerUserRequest({
+        firstName,
+        lastName,
+        gender: gender as Genders,
+        email,
+        password,
+      });
     }
-  }
+  };
 
   const handleSwitchForm = () => {
-    setGroup((prevGroup) => getFormState(prevGroup).group)
+    setGroup((prevGroup) => getFormState(prevGroup).group);
 
     setContainer((prevContainer) => ({
       ...prevContainer,
       label: activeForm.formLabel,
-    }))
+    }));
 
-    setErrors()
-  }
+    setErrors();
+  };
 
   return (
     <Form
@@ -177,7 +182,7 @@ const FormAuth = WithStyles<FormAuthProps>(({ styles }) => {
         disabled={activeForm.isLoading}
       />
     </Form>
-  )
-}, styles)
+  );
+}, styles);
 
-export default FormAuth
+export default FormAuth;

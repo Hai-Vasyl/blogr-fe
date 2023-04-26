@@ -1,14 +1,14 @@
-import { WithStyles } from "../../../helpers/with-styles"
-import Icon from "../../icon/Icon"
-import { ButtonTypes } from "../button-type.enum"
-import styles from "./button.module.scss"
+import { WithStyles } from "../../../helpers/with-styles";
+import Icon from "../../icon/Icon";
+import { ButtonTypes } from "../button-type.enum";
+import styles from "./button.module.scss";
 
 interface ButtonProps {
-  label?: string
-  icon?: string
-  type?: ButtonTypes
-  disabled?: boolean
-  onClick?: () => Promise<void> | void
+  label?: string;
+  icon?: string;
+  type?: ButtonTypes;
+  disabled?: boolean;
+  onClick?: () => Promise<void> | void;
 }
 
 const Button = WithStyles<ButtonProps>(
@@ -22,7 +22,7 @@ const Button = WithStyles<ButtonProps>(
   }) => {
     return (
       <button
-        className={styles.getClass("button")}
+        className={styles.getClass("button", disabled && "button--disabled")}
         onClick={onClick}
         type={type}
         disabled={disabled}
@@ -34,9 +34,9 @@ const Button = WithStyles<ButtonProps>(
           </span>
         )}
       </button>
-    )
+    );
   },
   styles
-)
+);
 
-export default Button
+export default Button;

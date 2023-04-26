@@ -3,40 +3,40 @@ import {
   FormInitialState,
   FormStateContainerName,
   FormStateFieldName,
-} from "../fields/interfaces"
+} from "../fields/interfaces";
 
-export type FieldState = Omit<Field, "getComponent">
+export type FieldState = Omit<Field, "getComponent">;
 export type ContainerState = {
-  label: FormInitialState["title"]
-}
+  label: FormInitialState["title"];
+};
 
 type FieldMappedState = {
-  [key: FormStateFieldName]: FieldState
-}
+  [key: FormStateFieldName]: FieldState;
+};
 
 export type FormMappedState = {
   [key: FormStateContainerName]: {
-    label: FormInitialState["title"]
-    fields: FieldMappedState
-  }
-}
+    label: FormInitialState["title"];
+    fields: FieldMappedState;
+  };
+};
 
 interface FieldComponentRaw {
-  property: FormStateFieldName
-  Component: React.FC<any>
+  property: FormStateFieldName;
+  Component: React.FC<any>;
 }
 
 export interface FormContainerComponentRaw {
-  property: FormStateContainerName
-  fields: FieldComponentRaw[]
+  property: FormStateContainerName;
+  fields: FieldComponentRaw[];
 }
 
 export class FormState {
-  public mappedState: FormMappedState
-  private components: FormContainerComponentRaw[]
+  public mappedState: FormMappedState;
+  private components: FormContainerComponentRaw[] = [];
 
   public constructor(state: FormInitialState | FormInitialState[]) {
-    state = Array.isArray(state) ? state : [state]
+    state = Array.isArray(state) ? state : [state];
 
     this.mappedState = state.reduce(
       (accumulatorForm: FormMappedState, formContainer) => {
@@ -47,16 +47,16 @@ export class FormState {
               accumulatorField: FieldMappedState,
               { getComponent, ...field }
             ) => {
-              accumulatorField[field.property] = field
-              return accumulatorField
+              accumulatorField[field.property] = field;
+              return accumulatorField;
             },
             {}
           ),
-        }
-        return accumulatorForm
+        };
+        return accumulatorForm;
       },
       {}
-    )
+    );
 
     this.components = state.map(({ fields, property }) => {
       return {
@@ -65,15 +65,15 @@ export class FormState {
           Component: getComponent(),
           property,
         })),
-      }
-    })
+      };
+    });
   }
 
   public getFormState(): FormMappedState {
-    return this.mappedState
+    return this.mappedState;
   }
 
   public getFormComponents(): FormContainerComponentRaw[] {
-    return this.components
+    return this.components;
   }
 }

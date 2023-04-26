@@ -1,0 +1,23 @@
+@import "../../../../../../../../index.scss";
+
+.select-option {
+  font-size: getFontSize(secondary);
+  background-color: getColor(primary-light-light);
+  text-align: left;
+  padding: 5px 10px;
+  transition: getTransition(primary);
+
+  &:hover {
+    background-color: getColor(accent);
+    color: white;
+  }
+
+  &--selected {
+    background-color: getColor(primary);
+
+    &:hover {
+      background-color: getColor(primary);
+      color: getColor(secondary);
+    }
+  }
+}

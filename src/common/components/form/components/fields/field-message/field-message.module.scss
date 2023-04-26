@@ -1,4 +1,4 @@
-@import '../../../../../../index.scss';
+@import "../../../../../../index.scss";
 
 .field-message {
   position: relative;
@@ -6,11 +6,11 @@
   @extend %fade-out;
   margin: 2px 0;
 
-  &--active{
+  &--active {
     @extend %fade-in;
   }
 
-  &__message{
+  &__message {
     position: absolute;
     padding: 6px;
     max-width: 350px;
@@ -24,19 +24,20 @@
     display: none;
     font-family: getFont(secondary);
     z-index: 5;
-    
-    &--right{
+
+    &--right {
       right: 0;
     }
   }
 
-  &:hover{ 
-    .field-message__message, .field-message__triangle {
+  &:hover {
+    .field-message__message,
+    .field-message__triangle {
       display: block;
     }
   }
 
-  &__icon{
+  &__icon {
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -46,7 +47,7 @@
     }
   }
 
-  &__triangle{
+  &__triangle {
     width: 0;
     height: 0;
     border: 6px solid transparent;

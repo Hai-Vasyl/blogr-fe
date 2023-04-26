@@ -1,12 +1,13 @@
-import { useEffect } from "react"
-import useStore from "./common/hooks/useStore"
-import Popup from "./common/components/popup/Popup"
-import NotificationContainer from "./common/components/notification/notification-container/NotificationContainer"
-import { setAuth, setUser } from "./common/actions/auth-slice"
-import Router from "./components/router/Router"
-import { serverApi } from "./common/queries/server-api-slice"
-import { activateConfirmation } from "./common/components/confirmation/confirmation-slice"
-import Confirmation from "./common/components/confirmation/Confirmation"
+import { useEffect } from "react";
+import useStore from "./common/hooks/useStore";
+import Popup from "./common/components/popup/Popup";
+import NotificationContainer from "./common/components/notification/notification-container/NotificationContainer";
+import { setAuth, setUser } from "./common/actions/auth-slice";
+import Router from "./components/router/Router";
+import { serverApi } from "./common/queries/server-api-slice";
+import { activateConfirmation } from "./common/components/confirmation/confirmation-slice";
+import Confirmation from "./common/components/confirmation/Confirmation";
+import useErrorHandler from "./common/hooks/useErrorHandler";
 
 function App() {
   const {
@@ -14,27 +15,29 @@ function App() {
     state: {
       auth: { isAuth, sub: userId },
     },
-  } = useStore()
+  } = useStore();
 
-  const [getUserRequest, getUser] = serverApi.useLazyGetUserQuery()
+  const [getUserRequest, getUser] = serverApi.useLazyGetUserQuery();
+
+  useErrorHandler(getUser.error);
 
   useEffect(() => {
-    dispatch(setAuth())
-  }, [dispatch])
+    dispatch(setAuth());
+  }, [dispatch]);
 
   useEffect(() => {
     const getUserData = async () => {
-      await getUserRequest(userId)
-    }
+      await getUserRequest(userId);
+    };
 
     if (isAuth) {
-      getUserData()
+      getUserData();
     }
-  }, [isAuth, getUserRequest])
+  }, [isAuth, getUserRequest]);
 
   useEffect(() => {
     if (getUser.isSuccess) {
-      dispatch(setUser(getUser.data))
+      dispatch(setUser(getUser.data));
     }
   }, [
     dispatch,
@@ -42,7 +45,7 @@ function App() {
     getUser.data,
     getUser.isSuccess,
     getUser.startedTimeStamp,
-  ])
+  ]);
 
   return (
     <div>
@@ -60,7 +63,7 @@ function App() {
               description:
                 "Delete current permissions, with no further restoring?",
               onAccept: () => {
-                console.log("DELETED")
+                console.log("DELETED");
               },
             })
           )
@@ -73,7 +76,7 @@ function App() {
       <NotificationContainer />
       <Router />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

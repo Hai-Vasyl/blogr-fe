@@ -1,42 +1,42 @@
-import Home from "../../pages/home/Home"
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import BlogsBlog from "../../pages/blogs-blog/BlogsBlog"
-import BlogsEditBlog from "../../pages/blogs-edit-blog/BlogsEditBlog"
-import BlogsEdit from "../../pages/blogs-edit/BlogsEdit"
-import Blogs from "../../pages/blogs/Blogs"
-import Files from "../../pages/files/Files"
-import NotFound from "../../pages/not-found/NotFound"
-import SettingsAccount from "../../pages/settings-account/SettingsAccount"
-import SettingsCategories from "../../pages/settings-categories/SettingsCategories"
-import SettingsPermissions from "../../pages/settings-permissions/SettingsPermissions"
-import SettingsRoles from "../../pages/settings-roles/SettingsRoles"
-import SettingsTags from "../../pages/settings-tags/SettingsTags"
-import SettingsUsers from "../../pages/settings-users/SettingsUsers"
-import Settings from "../../pages/settings/Settings"
-import UserBlogs from "../../pages/user-blogs/UserBlogs"
-import UserComments from "../../pages/user-comments/UserComments"
-import UserFiles from "../../pages/user-files/UserFiles"
-import UserLibraryBlogs from "../../pages/user-library-blogs/UserLibraryBlogs"
-import UserLibraryBookmarks from "../../pages/user-library-bookmarks/UserLibraryBookmarks"
-import UserLibraryComments from "../../pages/user-library-comments/UserLibraryComments"
-import UserLibraryFiles from "../../pages/user-library-files/UserLibraryFiles"
-import UserLibrarySavedFiles from "../../pages/user-library-saved-files/UserLibrarySavedFiles"
-import UserLibrary from "../../pages/user-library/UserLibrary"
-import UserPublishers from "../../pages/user-publishers/UserPublishers"
-import UserStream from "../../pages/user-stream/UserStream"
-import UserSubscribers from "../../pages/user-subscribers/UserSubscribers"
-import User from "../../pages/user/User"
-import Search from "../../pages/search/Search"
-import useStore from "../../common/hooks/useStore"
-import Head from "../../common/components/head/Head"
-import Navigation from "../../common/components/navigation/Navigation"
+import Home from "../../pages/home/Home";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import BlogsBlog from "../../pages/blogs-blog/BlogsBlog";
+import BlogsEditBlog from "../../pages/blogs-edit-blog/BlogsEditBlog";
+import BlogsEdit from "../../pages/blogs-edit/BlogsEdit";
+import Blogs from "../../pages/blogs/Blogs";
+import Files from "../../pages/files/Files";
+import NotFound from "../../pages/not-found/NotFound";
+import SettingsAccount from "../../pages/settings-account/SettingsAccount";
+import SettingsCategories from "../../pages/settings-categories/SettingsCategories";
+import SettingsPermissions from "../../pages/settings-permissions/SettingsPermissions";
+import SettingsRoles from "../../pages/settings-roles/SettingsRoles";
+import SettingsTags from "../../pages/settings-tags/SettingsTags";
+import SettingsUsers from "../../pages/settings-users/SettingsUsers";
+import Settings from "../../pages/settings/Settings";
+import UserBlogs from "../../pages/user-blogs/UserBlogs";
+import UserComments from "../../pages/user-comments/UserComments";
+import UserFiles from "../../pages/user-files/UserFiles";
+import UserLibraryBlogs from "../../pages/user-library-blogs/UserLibraryBlogs";
+import UserLibraryBookmarks from "../../pages/user-library-bookmarks/UserLibraryBookmarks";
+import UserLibraryComments from "../../pages/user-library-comments/UserLibraryComments";
+import UserLibraryFiles from "../../pages/user-library-files/UserLibraryFiles";
+import UserLibrarySavedFiles from "../../pages/user-library-saved-files/UserLibrarySavedFiles";
+import UserLibrary from "../../pages/user-library/UserLibrary";
+import UserPublishers from "../../pages/user-publishers/UserPublishers";
+import UserStream from "../../pages/user-stream/UserStream";
+import UserSubscribers from "../../pages/user-subscribers/UserSubscribers";
+import User from "../../pages/user/User";
+import Search from "../../pages/search/Search";
+import useStore from "../../common/hooks/useStore";
+import Head from "../../common/components/head/Head";
+import Navigation from "../../common/components/navigation/Navigation";
 
 const Router = () => {
   const {
     state: {
       auth: { isAuth },
     },
-  } = useStore()
+  } = useStore();
 
   const baseRoutes = [
     {
@@ -75,7 +75,7 @@ const Router = () => {
       description: "Blogr - Not found page",
       element: <NotFound />,
     },
-  ]
+  ];
 
   const authorizedRoutes = [
     {
@@ -211,21 +211,21 @@ const Router = () => {
       description: "Blogr - Tags settings",
       element: <SettingsTags />,
     },
-  ]
+  ];
 
-  const routes = isAuth ? baseRoutes.concat(authorizedRoutes) : baseRoutes
+  const routes = isAuth ? baseRoutes.concat(authorizedRoutes) : baseRoutes;
   const routerRoutes = routes.map(({ path, title, description, element }) => ({
     path,
     element: (
       <div>
         <Head title={title} description={description} />
         <Navigation />
-        {element}
+        <div className="page-wrapper">{element}</div>
       </div>
     ),
-  }))
+  }));
 
-  return <RouterProvider router={createBrowserRouter(routerRoutes)} />
-}
+  return <RouterProvider router={createBrowserRouter(routerRoutes)} />;
+};
 
-export default Router
+export default Router;

@@ -1,56 +1,56 @@
-import { useState } from "react"
-import { Style } from "../../../classes/cascade-styles"
-import FormContainer from "../components/form-container/FormContainer"
+import { useState } from "react";
+import { Style } from "../../../classes/cascade-styles";
+import FormContainer from "../components/form-container/FormContainer";
 import {
   FormState,
   FieldState,
   ContainerState,
-} from "../components/classes/form-state"
+} from "../components/classes/form-state";
 import {
   FormInitialState,
   FormStateContainerName,
   FormStateFieldName,
-} from "../components/fields/interfaces"
-import { FieldErrorMapped } from "../../../hooks/useErrorHandler"
+} from "../components/fields/interfaces";
+import { FieldErrorMapped } from "../../../hooks/useErrorHandler";
 
 interface UseFormProps {
-  state: FormInitialState | FormInitialState[]
-  group?: string
+  state: FormInitialState | FormInitialState[];
+  group?: string;
 }
 
 interface SetFieldOptions {
-  container: FormStateContainerName
-  field: FormStateFieldName
+  container: FormStateContainerName;
+  field: FormStateFieldName;
 }
 
 type ActiveFormValues = {
   [key: string]: {
-    [key: string]: string
-  }
-}
+    [key: string]: string;
+  };
+};
 
 export type GetContainersType = (
   styles: Style[],
   isLoading: boolean
-) => JSX.Element[]
+) => JSX.Element[];
 
 export type SetFormValueType = (
   container: FormStateContainerName,
   property: FormStateFieldName,
   value: string
-) => void
+) => void;
 
 const useForm = ({ state, group }: UseFormProps) => {
-  const form = new FormState(state)
+  const form = new FormState(state);
 
-  const [activeGroup, setActiveGroup] = useState<string | undefined>(group)
-  const [formState, setFormState] = useState(form.getFormState())
+  const [activeGroup, setActiveGroup] = useState<string | undefined>(group);
+  const [formState, setFormState] = useState(form.getFormState());
 
   const setContainer = (
     setState: (prevState: ContainerState) => ContainerState,
     container?: FormStateContainerName
   ) => {
-    const containerName = container || Object.keys(formState)[0]
+    const containerName = container || Object.keys(formState)[0];
 
     setFormState((prevForm) => ({
       ...prevForm,
@@ -58,24 +58,24 @@ const useForm = ({ state, group }: UseFormProps) => {
         ...prevForm[containerName],
         ...setState({ label: prevForm[containerName].label }),
       },
-    }))
-  }
+    }));
+  };
 
   const setField = (
     setState: (prevState: FieldState) => FieldState,
     options: SetFieldOptions | FormStateFieldName
   ) => {
-    const isOptionFieldName = typeof options === "string"
+    const isOptionFieldName = typeof options === "string";
 
-    let containerName: FormStateContainerName
-    let fieldName: FormStateFieldName
+    let containerName: FormStateContainerName;
+    let fieldName: FormStateFieldName;
 
     if (isOptionFieldName) {
-      containerName = Object.keys(formState)[0]
-      fieldName = options
+      containerName = Object.keys(formState)[0];
+      fieldName = options;
     } else {
-      containerName = options.container
-      fieldName = options.field
+      containerName = options.container;
+      fieldName = options.field;
     }
 
     setFormState((prevForm) => ({
@@ -87,16 +87,16 @@ const useForm = ({ state, group }: UseFormProps) => {
           [fieldName]: setState(prevForm[containerName].fields[fieldName]),
         },
       },
-    }))
-  }
+    }));
+  };
 
   const setFormValue = (
     container: FormStateContainerName,
     field: FormStateFieldName,
     value: string
   ) => {
-    setField((prev) => ({ ...prev, value, message: "" }), { container, field })
-  }
+    setField((prev) => ({ ...prev, value, message: "" }), { container, field });
+  };
 
   const setErrors = (errors?: FieldErrorMapped) => {
     setFormState((prevFormState) =>
@@ -115,16 +115,16 @@ const useForm = ({ state, group }: UseFormProps) => {
                         ...fieldValue,
                         message: errors ? errors[fieldKey] : "",
                       },
-                    ]
+                    ];
                   }
                 )
               ),
             },
-          ]
+          ];
         })
       )
-    )
-  }
+    );
+  };
 
   const getContainers = (styles: Style[], isLoading: boolean) =>
     form
@@ -139,7 +139,7 @@ const useForm = ({ state, group }: UseFormProps) => {
           styles={styles}
           isLoading={isLoading}
         />
-      ))
+      ));
 
   const activeFormValues: ActiveFormValues = Object.fromEntries(
     Object.entries(formState).map(([containerKey, containerValue]) => {
@@ -149,17 +149,17 @@ const useForm = ({ state, group }: UseFormProps) => {
           Object.entries(containerValue.fields).reduce(
             (accumulator: Array<[string, string]>, [fieldKey, fieldValue]) => {
               if (!activeGroup || fieldValue.groups.includes(activeGroup)) {
-                accumulator.push([fieldKey, fieldValue.value])
+                accumulator.push([fieldKey, fieldValue.value]);
               }
 
-              return accumulator
+              return accumulator;
             },
             []
           )
         ),
-      ]
+      ];
     })
-  )
+  );
 
   return {
     formValues: activeFormValues,
@@ -171,7 +171,7 @@ const useForm = ({ state, group }: UseFormProps) => {
     getContainers,
     setContainer,
     setErrors,
-  }
-}
+  };
+};
 
-export default useForm
+export default useForm;

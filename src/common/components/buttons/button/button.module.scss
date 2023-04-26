@@ -1,4 +1,4 @@
-@import '../../../../index.scss';
+@import "../../../../index.scss";
 
 .button {
   padding: 12px 30px;
@@ -12,9 +12,14 @@
   transition: getTransition(primary);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   border: 1px solid getColor(secondary);
-  
+
+  &--disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -1px;
     left: -1px;
@@ -24,24 +29,24 @@
     background-color: getColor(accent);
     opacity: 0;
   }
-  
+
   &:hover {
     &::before {
-      content: '';
+      content: "";
       opacity: 1;
       right: -1px;
     }
-    
-    & .button__name{
+
+    & .button__name {
       color: white;
     }
-    
+
     & .icon {
       color: white;
     }
   }
-  
-  &__name{
+
+  &__name {
     position: relative;
     font-size: getFontSize(secondary);
     transition: getTransition(primary);
